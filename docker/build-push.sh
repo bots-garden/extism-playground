@@ -9,5 +9,6 @@ docker buildx build \
 --build-arg="TINYGO_VERSION=0.30.0" \
 --build-arg="EXTISM_VERSION=0.3.3" \
 --build-arg="EXTISM_ARCH=amd64" \
+--build-arg="USER_NAME=gitpod" \
 --platform linux/amd64 \
 --push -t ${DOCKER_USER}/${IMAGE_BASE_NAME}:${IMAGE_TAG} .
