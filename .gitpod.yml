@@ -1,0 +1,9 @@
+image: k33g/gitpod-extism-playground:0.0.0
+
+vscode:
+  extensions:
+    - PKief.material-icon-theme
+    - PKief.material-product-icons
+    - aaron-bond.better-comments
+    - golang.go
+    - rust-lang.rust-analyzer
