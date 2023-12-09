@@ -45,20 +45,6 @@ mv go /usr/local
 EOF
 
 # ------------------------------------
-# Set Environment Variables for Go
-# ------------------------------------
-ENV PATH="/usr/local/go/bin:${PATH}"
-ENV GOPATH="/home/${USER_NAME}/go"
-ENV GOROOT="/usr/local/go"
-
-RUN <<EOF
-go version
-go install -v golang.org/x/tools/gopls@latest
-go install -v github.com/ramya-rao-a/go-outline@latest
-go install -v github.com/stamblerre/gocode@v1.0.0
-EOF
-
-# ------------------------------------
 # Install TinyGo
 # ------------------------------------
 RUN <<EOF
@@ -86,6 +72,20 @@ extism --version
 EOF
 
 USER gitpod
+
+# ------------------------------------
+# Set Environment Variables for Go
+# ------------------------------------
+ENV GOROOT=/usr/local/go
+ENV GOPATH=$HOME/go
+ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
+RUN <<EOF
+go version
+go install -v golang.org/x/tools/gopls@latest
+go install -v github.com/ramya-rao-a/go-outline@latest
+go install -v github.com/stamblerre/gocode@v1.0.0
+EOF
 
 # ------------------------------------
 # Install Rust + Wasm Toolchain
