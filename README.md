@@ -57,9 +57,49 @@ tinygo build -scheduler=none --no-debug \
 -target wasi main.go
 ```
 
-### Call the function with the EXtism CLI
+### Call the function with the Extism CLI
 
 ```bash
 extism call hello.wasm hello --input "Bob Morane" --wasi
 # you should get: 🤗 Hello Bob Morane
+```
+
+## Create a Rust plug-in
+
+### Generate the project
+
+```bash
+cargo new --lib hello_demo --name hello
+cd hello_demo
+cargo add extism-pdk@1.0.0-rc1
+```
+
+Add this section to the `Cargo.toml` file:
+```toml
+[lib]
+crate_type = ["cdylib"]
+```
+
+Replace the source code of `srg/lib.rs` by this content:
+```rust
+use extism_pdk::*;
+
+#[plugin_fn]
+pub fn hello(name: String) -> FnResult<String> {
+    Ok(format!("👋 Hello, {}!", name))
+}
+```
+
+### Build the wasm plug-in
+
+```bash
+cargo clean
+cargo build --release --target wasm32-wasi
+```
+
+### Call the function with the Extism CLI
+
+```bash
+extism call ./target/wasm32-wasi/release/hello.wasm hello --input "Bob Morane" --wasi
+# you should get: 👋 Hello, Bob Morane!
 ```
