@@ -1,4 +1,5 @@
 # Extism playground
+**[🍊 Open this project with Gitpod](https://gitpod.io/#https://github.com/bots-garden/extism-playground)**
 
 Ready to use development platform  to learn Extism plug-in creation
 
@@ -14,8 +15,6 @@ This project is "[Gitpodified](https://www.gitpod.io/)" and brings to you all th
 |                                             |          | 
 
 > 🐳 The Docker image https://hub.docker.com/r/k33g/gitpod-extism-playground used by the Gitpod project is built with this Dockerfile: `docker/Dockerfile`
-
-[🍊 Open this project with Gitpod](https://gitpod.io/#https://github.com/bots-garden/extism-playground)
 
 ## Create a TinyGo plug-in
 
