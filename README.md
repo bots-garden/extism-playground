@@ -12,7 +12,7 @@ This project is "[Gitpodified](https://www.gitpod.io/)" and brings to you all th
 | TinyGo                                      | `0.30.0`    | 
 | Rustc / Cargo                               | `1.74.1`    | 
 | Wasm-pack                                   | `0.12.1`    | 
-| Node.js                                     | `20.10.0`.  | 
+| Node.js                                     | `20.10.0`   | 
 | Extism-js                                   | `1.0.0-rc1` | 
 
 > 🐳 The Docker image https://hub.docker.com/r/k33g/gitpod-extism-playground used by the Gitpod project is built with this Dockerfile: `docker/Dockerfile`
@@ -103,4 +103,37 @@ cargo build --release --target wasm32-wasi
 ```bash
 extism call ./target/wasm32-wasi/release/hello.wasm hello --input "Bob Morane" --wasi
 # you should get: 👋 Hello, Bob Morane!
+```
+
+## Create a JavaScript plug-in
+
+### Generate the project
+
+```bash
+mkdir hello-world
+cd hello-world
+touch index.js
+```
+
+Add this source code to `index.js`:
+```javascript
+function helloWorld() {
+    const name = Host.inputString()
+    Host.outputString(`👋 Hello world 🌍, ${name} 🤗`)
+}
+
+module.exports = {helloWorld}
+```
+
+### Build the wasm plug-in
+
+```bash
+extism-js index.js -o hello-world.wasm
+```
+
+### Call the function with the Extism CLI
+
+```bash
+extism call hello-world.wasm helloWorld --input "Bob Morane" --wasi
+# you should get: 👋 Hello world 🌍, Bob Morane 🤗
 ```
