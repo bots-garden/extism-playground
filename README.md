@@ -5,14 +5,15 @@ Ready to use development platform  to learn Extism plug-in creation
 
 This project is "[Gitpodified](https://www.gitpod.io/)" and brings to you all the necessary tools to start quickly with the [development of the Extism plug-ins](https://extism.org/docs/quickstart/plugin-quickstart).
 
-| Installed components                        | Version  |
-| :------------------------------------------ | -------: | 
-| [Extism CLI](https://github.com/extism/cli) | `0.3.3`  | 
-| Go                                          | `1.21.3` | 
-| TinyGo                                      | `0.30.0` | 
-| Rustc / Cargo                               | `1.74.1` | 
-| Wasm-pack                                   | `0.12.1` | 
-|                                             |          | 
+| Installed components                        | Version     |
+| :------------------------------------------ | ----------: | 
+| [Extism CLI](https://github.com/extism/cli) | `0.3.3`     | 
+| Go                                          | `1.21.3`    | 
+| TinyGo                                      | `0.30.0`    | 
+| Rustc / Cargo                               | `1.74.1`    | 
+| Wasm-pack                                   | `0.12.1`    | 
+| Node.js                                     | `20.10.0`.  | 
+| Extism-js                                   | `1.0.0-rc1` | 
 
 > 🐳 The Docker image https://hub.docker.com/r/k33g/gitpod-extism-playground used by the Gitpod project is built with this Dockerfile: `docker/Dockerfile`
 

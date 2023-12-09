@@ -12,8 +12,10 @@ ARG TINYGO_ARCH=${TINYGO_ARCH}
 ARG TINYGO_VERSION=${TINYGO_VERSION}
 ARG EXTISM_ARCH=${EXTISM_ARCH}
 ARG EXTISM_VERSION=${EXTISM_VERSION}
-
-ARG USER_NAME=${USER_NAME}
+ARG EXTISM_JS_VERSION=${EXTISM_JS_VERSION}
+ARG EXTISM_JS_ARCH=${EXTISM_JS_ARCH}
+ARG EXTISM_JS_OS=${EXTISM_JS_OS}
+ARG NODE_MAJOR=${NODE_MAJOR}
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -69,6 +71,29 @@ tar -xf extism-v${EXTISM_VERSION}-linux-${EXTISM_ARCH}.tar.gz -C /usr/bin
 rm extism-v${EXTISM_VERSION}-linux-${EXTISM_ARCH}.tar.gz
 
 extism --version
+EOF
+
+# ------------------------------------
+# Install NodeJS
+# ------------------------------------
+RUN <<EOF
+apt-get update && apt-get install -y ca-certificates curl gnupg
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
+apt-get update && apt-get install nodejs -y
+EOF
+
+# -----------------------
+# Install Extism JS PDK
+# -----------------------
+RUN <<EOF
+export EXTISM_JS_VERSION="${EXTISM_JS_VERSION}"
+export EXTISM_JS_ARCH="${EXTISM_JS_ARCH}"
+export EXTISM_JS_OS="${EXTISM_JS_OS}"
+curl -L -O "https://github.com/extism/js-pdk/releases/download/v${EXTISM_JS_VERSION}/extism-js-${EXTISM_JS_ARCH}-${EXTISM_JS_OS}-v${EXTISM_JS_VERSION}.gz"
+gunzip extism-js*.gz
+chmod +x extism-js-*
+mv extism-js-* /usr/local/bin/extism-js
 EOF
 
 USER gitpod

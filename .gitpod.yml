@@ -1,4 +1,4 @@
-image: k33g/gitpod-extism-playground:0.0.0
+image: k33g/gitpod-extism-playground:0.0.1
 
 vscode:
   extensions:
